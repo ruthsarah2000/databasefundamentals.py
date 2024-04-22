@@ -1,0 +1,58 @@
+To accomplish this task, I start by designing a normalized database schema for the "BookHaven" database. 
+Then, I created an Entity-Relationship Diagram (ERD) to visually represent the relationships between the tables. 
+After that, I implemented a self-referencing relationship within the Authors table. 
+Finally, I have provided a database normalization analysis explaining how the schema design adheres to the principles of normalization, highlighting examples from each normal form.
+Task 1: Database Schema Design
+
+Books Table:
+book_id (Primary Key, INT)
+title (VARCHAR)
+isbn (VARCHAR)
+publication_year (YEAR)
+price (DECIMAL)
+Authors Table:
+
+author_id (Primary Key, INT)
+first_name (VARCHAR)
+last_name (VARCHAR)
+Customers Table:
+
+customer_id (Primary Key, INT)
+first_name (VARCHAR)
+last_name (VARCHAR)
+email (VARCHAR)
+address (VARCHAR)
+Transactions Table:
+
+transaction_id (Primary Key, INT)
+customer_id (Foreign Key, INT)
+book_id (Foreign Key, INT)
+transaction_date (DATE)
+
+To implement a self-referencing relationship within the Authors table, 
+I added a column named collaborator_id, which will reference the author_id column. 
+This indicates the authors who have collaborated.
+Authors Table (Updated):
+
+author_id (Primary Key, INT)
+first_name (VARCHAR)
+last_name (VARCHAR)
+collaborator_id (Foreign Key, INT, References author_id in Authors)
+
+First Normal Form (1NF):
+
+All tables have atomic values in each column.
+No repeating groups or arrays within cells.
+Example: Each column in the Books, Authors, Customers, and Transactions tables contains atomic values.
+Second Normal Form (2NF):
+
+All attributes are fully functional abd dependent on the primary key.
+No partial dependencies exist.
+Example: In the Transactions table, the attributes (customer_id, book_id) depend fully on the primary key (transaction_id).
+Third Normal Form (3NF):
+
+Elimination of transitive dependencies.
+All attributes depend only on the primary key or other candidate keys.
+Example: In the Authors table, the collaborator_id attribute depends only on the primary key (author_id), ensuring no transitive dependencies.
+This analysis confirms that the schema design adheres to the principles of normalization up to the Third Normal Form (3NF). Each normal form ensures data integrity, 
+reduces redundancy, and facilitates efficient database operations.
