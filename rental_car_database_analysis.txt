@@ -1,0 +1,34 @@
+Vehicles Table:
+vehicle_id (Primary Key, INT)
+make (VARCHAR)
+model (VARCHAR)
+year (INT)
+mileage (INT)
+status (ENUM: 'available', 'rented')
+
+Rental_Agreements Table:
+agreement_id (Primary Key, INT)
+vehicle_id (Foreign Key, INT, Unique)
+customer_id (Foreign Key, INT)
+start_date (DATE)
+end_date (DATE)
+total_cost (DECIMAL)
+
+To ensure data integrity and respect unique constraints in the one-to-one relationship between Vehicles and Rental_Agreements:
+
+In the Vehicles table, the vehicle_id serves as the primary key.
+In the Rental_Agreements table, the agreement_id serves as the primary key.
+The vehicle_id in the Rental_Agreements table is a foreign key referencing the vehicle_id in the Vehicles table. It is also marked as unique to enforce the one-to-one relationship.
+New Vehicle Additions:
+When a new vehicle is added, it is inserted into the Vehicles table.
+Initially, its status is set to 'available' until it is rented out.
+Rental Agreement Updates:
+When a rental agreement is created, a new entry is added to the Rental_Agreements table.
+The vehicle_id in the Rental_Agreements table ensures that each rental agreement is associated with a single vehicle.
+Updates to rental agreements, such as extending the rental period or updating the total cost, can be performed by modifying the corresponding record in the Rental_Agreements table.
+Vehicle Availability Checks:
+To check the availability of a vehicle, the system queries the Vehicles table and checks the status of the vehicle.
+If the vehicle status is 'available', it means the vehicle is not currently rented out and is available for rental.
+If the vehicle status is 'rented', it means the vehicle is currently on a rental agreement and is not available for rental until the agreement ends.
+This database design effectively handles scenarios such as new vehicle additions, rental agreement updates, and vehicle availability checks while maintaining data integrity 
+through the one-to-one relationship between Vehicles and Rental_Agreements.
